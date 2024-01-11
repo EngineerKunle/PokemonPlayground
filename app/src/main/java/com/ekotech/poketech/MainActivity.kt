@@ -3,10 +3,7 @@ package com.ekotech.poketech
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
+import com.ekotech.poketech.screen.PokemonDexApp
 import com.ekotech.poketech.ui.theme.PokemonDexTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,10 +14,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             window.statusBarColor = getColor(R.color.app_red)
             PokemonDexTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-
-                }
+                PokemonDexApp()
             }
         }
     }

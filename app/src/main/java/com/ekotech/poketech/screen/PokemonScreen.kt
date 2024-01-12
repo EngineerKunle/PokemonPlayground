@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,6 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ekotech.poketech.R
+import com.ekotech.poketech.ui.PokemonProgressBar
+import com.ekotech.poketech.ui.theme.appRed
+import com.ekotech.poketech.ui.theme.appWhite
 import com.ekotech.poketech.uistate.data.UIResult
 import com.ekotech.poketech.viewmodel.PokeViewModel
 
@@ -64,10 +68,14 @@ fun PokemonDexApp(
                     UIResult.Loading -> {
                         PokemonProgressBar()
                     }
-                    is UIResult.Success -> {
 
+                    is UIResult.Success -> {
+                        DisplayPokemonScreen(data = state.data)
                     }
-                    is UIResult.Error -> TODO()
+
+                    is UIResult.Error -> {
+                        PokemonErrorScreenGeneric()
+                    }
                 }
             }
         }
@@ -83,9 +91,9 @@ fun PokemonDexAppBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        title = { Text(stringResource(id = currentScreen.title)) },
+        title = { Text(stringResource(id = currentScreen.title), fontWeight = FontWeight.Bold) },
         modifier = modifier,
-        colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = appRed, titleContentColor = appWhite),
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {

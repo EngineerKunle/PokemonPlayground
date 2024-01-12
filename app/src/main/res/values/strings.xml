@@ -2,4 +2,8 @@
     <string name="app_name">PokemonDex</string>
     <string name="pokemon">Pokemon</string>
     <string name="back_button">back\n</string>
+
+    <string name="generic_error_title">Oops!</string>
+    <string name="generic_error_message">Something went wrong</string>
+    <string name="generic_error_dismiss">OK</string>
 </resources>

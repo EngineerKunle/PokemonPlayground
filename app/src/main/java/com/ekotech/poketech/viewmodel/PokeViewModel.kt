@@ -10,15 +10,16 @@ import com.ekotech.poketech.uistate.data.UIResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class PokeViewModel : ViewModel() {
+class PokeViewModel @Inject constructor() : ViewModel() {
     private val _uiState: MutableState<UIResult<PokemonState>> = mutableStateOf(UIResult.Loading)
     val state: State<UIResult<PokemonState>> = _uiState
 
     init {
         viewModelScope.launch {
-            delay(2L)
+            delay(2000)
             mockData()
         }
     }

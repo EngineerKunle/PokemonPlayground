@@ -1,4 +1,4 @@
-package com.ekotech.poketech.screen
+package com.ekotech.poketech.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ekotech.poketech.ui.theme.Pink80
+import com.ekotech.poketech.ui.theme.appRed
 
 @Composable
 fun PokemonProgressBar() {
@@ -20,7 +20,7 @@ fun PokemonProgressBar() {
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(100.dp),
-            color = Pink80,
+            color = appRed,
             strokeWidth = 10.dp,
         )
     }

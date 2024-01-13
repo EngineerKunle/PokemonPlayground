@@ -25,6 +25,14 @@ class PokeViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun mockData() {
-        _uiState.value = UIResult.Success(PokemonState(1, "Bulbasaur"))
+        _uiState.value = UIResult.Success(PokemonState(1, mockPokemonList()))
     }
+
+    private fun mockPokemonList() = listOf(
+        "Bulbasaur",
+        "Squirtle",
+        "Pikachu",
+        "Pidgeotto",
+        "Charizard"
+    )
 }

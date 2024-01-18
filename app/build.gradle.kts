@@ -51,7 +51,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
@@ -80,7 +80,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-compiler:2.48.1")
 
-    val lifecycleVersion = "2.6.2"
+    val lifecycleVersion = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
@@ -94,10 +94,10 @@ dependencies {
 //    implementation "androidx.compose.foundation:foundation:1.5.0-alpha04"
 //    implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
 //
-//    def mockkVersion = "1.13.5"
-//    testImplementation "io.mockk:mockk:${mockkVersion}"
-//
-//    def coroutines_version = "1.7.1"
-//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    val mockkVersion = "1.13.5"
+    testImplementation("io.mockk:mockk:${mockkVersion}")
+
+    val coroutinesVersion = "1.7.1"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 
 }

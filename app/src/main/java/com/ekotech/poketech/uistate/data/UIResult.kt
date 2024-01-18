@@ -2,6 +2,7 @@ package com.ekotech.poketech.uistate.data
 
 import androidx.annotation.StringRes
 
+//TODO: Might have to delete this
 sealed class UIResult<out T : Any> {
     data object Loading : UIResult<Nothing>()
     data class Success<out T : Any>(val data: T) : UIResult<T>()

@@ -10,13 +10,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ekotech.poketech.uistate.PokemonState
+import com.ekotech.poketech.data.model.PokemonAllDTO
 
 @Composable
-fun DisplayPokemonScreen(data: PokemonState) {
-    LazyColumn {
-        items(data.message) {
-            PokemonCard(name = it)
+fun DisplayPokemonScreen(data: PokemonAllDTO?) {
+    data?.let { allDto ->
+        if (allDto.results.isNotEmpty()) {
+            LazyColumn {
+                items(allDto.results) { pokemonDto ->
+                    PokemonCard(pokemonDto.name)
+                }
+            }
         }
     }
 }

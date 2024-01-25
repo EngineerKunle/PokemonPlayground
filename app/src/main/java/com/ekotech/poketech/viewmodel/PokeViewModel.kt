@@ -1,38 +1,38 @@
 package com.ekotech.poketech.viewmodel
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ekotech.poketech.uistate.PokemonState
-import com.ekotech.poketech.uistate.data.UIResult
+import com.ekotech.poketech.data.model.PokemonAllDTO
+import com.ekotech.poketech.usecase.GetAllPokemon
+import com.ekotech.poketech.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PokeViewModel @Inject constructor() : ViewModel() {
-    private val _uiState: MutableState<UIResult<PokemonState>> = mutableStateOf(UIResult.Loading)
-    val state: State<UIResult<PokemonState>> = _uiState
+class PokeViewModel @Inject constructor(
+    private val getAllPokemon: GetAllPokemon
+) : ViewModel() {
+
+    private val _allPokemon: MutableState<Resource<PokemonAllDTO>> =
+        mutableStateOf(Resource.Loading())
+
+    val allPokemon = _allPokemon
 
     init {
+        getAllPokemonData()
+    }
+
+    private fun getAllPokemonData() {
         viewModelScope.launch {
-            delay(2000)
-            mockData()
+            try {
+                val result = getAllPokemon.invoke()
+                _allPokemon.value = result
+            } catch (e: Exception) {
+                _allPokemon.value = Resource.Error(e.message.toString())
+            }
         }
     }
-
-    private fun mockData() {
-        _uiState.value = UIResult.Success(PokemonState(1, mockPokemonList()))
-    }
-
-    private fun mockPokemonList() = listOf(
-        "Bulbasaur",
-        "Squirtle",
-        "Pikachu",
-        "Pidgeotto",
-        "Charizard"
-    )
 }

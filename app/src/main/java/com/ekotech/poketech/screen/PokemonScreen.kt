@@ -7,13 +7,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +27,7 @@ import com.ekotech.poketech.R
 import com.ekotech.poketech.ui.PokemonProgressBar
 import com.ekotech.poketech.ui.theme.appRed
 import com.ekotech.poketech.ui.theme.appWhite
-import com.ekotech.poketech.uistate.data.UIResult
+import com.ekotech.poketech.util.Resource
 import com.ekotech.poketech.viewmodel.PokeViewModel
 
 enum class PokemonScreen(@StringRes val title: Int) {
@@ -41,7 +41,8 @@ fun PokemonDexApp(
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val state = viewModel.state.value
+    //var name by remember { mutableStateOf("") }
+    val state by remember { viewModel.allPokemon }
 
     val currentScreen = PokemonScreen.valueOf(
         backStackEntry?.destination?.route ?: PokemonScreen.Pokemon.name
@@ -65,16 +66,13 @@ fun PokemonDexApp(
         {
             composable(route = PokemonScreen.Pokemon.name) {
                 when (state) {
-                    UIResult.Loading -> {
+                    is Resource.Loading -> {
                         PokemonProgressBar()
                     }
 
-                    is UIResult.Success -> {
+                    is Resource.Error -> TODO()
+                    is Resource.Success -> {
                         DisplayPokemonScreen(data = state.data)
-                    }
-
-                    is UIResult.Error -> {
-                        PokemonErrorScreenGeneric()
                     }
                 }
             }

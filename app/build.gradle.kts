@@ -57,7 +57,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -90,14 +90,19 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.6")
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-//
-//    implementation "androidx.compose.foundation:foundation:1.5.0-alpha04"
-//    implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
-//
+
+    val coilVersion = "2.5.0"
+    implementation("io.coil-kt:coil-compose:${coilVersion}")
+
     val mockkVersion = "1.13.5"
     testImplementation("io.mockk:mockk:${mockkVersion}")
 
-    val coroutinesVersion = "1.7.1"
+    val coroutinesVersion = "1.7.3"
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+
+    val composeBom = platform("androidx.compose:compose-bom:2024.01.00")
+    implementation(composeBom)
+
+    implementation("androidx.compose.material3:material3-android:1.2.0-rc01")
 
 }

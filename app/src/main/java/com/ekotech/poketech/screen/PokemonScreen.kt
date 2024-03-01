@@ -29,6 +29,7 @@ import com.ekotech.poketech.ui.theme.appRed
 import com.ekotech.poketech.ui.theme.appWhite
 import com.ekotech.poketech.util.Resource
 import com.ekotech.poketech.viewmodel.PokeViewModel
+import org.w3c.dom.Text
 
 enum class PokemonScreen(@StringRes val title: Int) {
     Pokemon(title = R.string.pokemon)
@@ -41,8 +42,7 @@ fun PokemonDexApp(
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
-    //var name by remember { mutableStateOf("") }
-    val state by remember { viewModel.allPokemon }
+    val state by remember { viewModel.allPokeState }
 
     val currentScreen = PokemonScreen.valueOf(
         backStackEntry?.destination?.route ?: PokemonScreen.Pokemon.name

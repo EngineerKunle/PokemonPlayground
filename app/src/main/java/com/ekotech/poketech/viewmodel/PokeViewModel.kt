@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ekotech.poketech.data.model.PokemonAllDTO
+import com.ekotech.poketech.uistate.PokemonState
+import com.ekotech.poketech.uistate.PokemonStateMapper
 import com.ekotech.poketech.usecase.GetAllPokemon
 import com.ekotech.poketech.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,13 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokeViewModel @Inject constructor(
-    private val getAllPokemon: GetAllPokemon
+    private val getAllPokemon: GetAllPokemon,
+    private val stateMapper: PokemonStateMapper,
 ) : ViewModel() {
 
-    private val _allPokemon: MutableState<Resource<PokemonAllDTO>> =
-        mutableStateOf(Resource.Loading())
+//    private val _allPokemon: MutableState<Resource<PokemonAllDTO>> =
+//        mutableStateOf(Resource.Loading())
+//
+//    val allPokemon = _allPokemon
 
-    val allPokemon = _allPokemon
+    //Rename once working
+    private val _allPokeState: MutableState<Resource<List<PokemonState>>> =
+        mutableStateOf(Resource.Loading())
+    val allPokeState = _allPokeState
 
     init {
         getAllPokemonData()
@@ -29,10 +37,21 @@ class PokeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val result = getAllPokemon.invoke()
-                _allPokemon.value = result
+                _allPokeState.value = stateMapper.transform(result)
             } catch (e: Exception) {
-                _allPokemon.value = Resource.Error(e.message.toString())
+                _allPokeState.value = Resource.Error(e.message.toString())
             }
         }
     }
+
+//    private fun getAllPokemonData() {
+//        viewModelScope.launch {
+//            try {
+//                val result = getAllPokemon.invoke()
+//                _allPokemon.value = result
+//            } catch (e: Exception) {
+//                _allPokemon.value = Resource.Error(e.message.toString())
+//            }
+//        }
+//    }
 }

@@ -19,12 +19,6 @@ class PokeViewModel @Inject constructor(
     private val stateMapper: PokemonStateMapper,
 ) : ViewModel() {
 
-//    private val _allPokemon: MutableState<Resource<PokemonAllDTO>> =
-//        mutableStateOf(Resource.Loading())
-//
-//    val allPokemon = _allPokemon
-
-    //Rename once working
     private val _allPokeState: MutableState<Resource<List<PokemonState>>> =
         mutableStateOf(Resource.Loading())
     val allPokeState = _allPokeState
@@ -43,15 +37,4 @@ class PokeViewModel @Inject constructor(
             }
         }
     }
-
-//    private fun getAllPokemonData() {
-//        viewModelScope.launch {
-//            try {
-//                val result = getAllPokemon.invoke()
-//                _allPokemon.value = result
-//            } catch (e: Exception) {
-//                _allPokemon.value = Resource.Error(e.message.toString())
-//            }
-//        }
-//    }
 }

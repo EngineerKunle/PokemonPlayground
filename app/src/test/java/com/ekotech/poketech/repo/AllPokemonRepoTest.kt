@@ -50,7 +50,7 @@ class AllPokemonRepoTest {
 
         coEvery {
             service.getAllPokemon()
-        } returns  Response.error(401, "Unauthorized".toResponseBody())
+        } returns  Response.error(501, "Unauthorized".toResponseBody())
 
         val result = allPokemon.getAllPokemon()
 

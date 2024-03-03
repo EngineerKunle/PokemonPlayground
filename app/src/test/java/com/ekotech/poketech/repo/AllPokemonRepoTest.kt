@@ -54,7 +54,7 @@ class AllPokemonRepoTest {
 
         val result = allPokemon.getAllPokemon()
 
-        assertEquals(true, result is Resource.Success)
+        assertEquals(true, result is Resource.Error)
     }
 
     private fun mockData(): Response<PokemonAllDTO> {

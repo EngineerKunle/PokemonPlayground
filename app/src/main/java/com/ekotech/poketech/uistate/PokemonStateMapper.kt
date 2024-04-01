@@ -16,6 +16,7 @@ class PokemonStateMapper @Inject constructor() {
         items?.let { dto ->
             dto.data?.results?.forEachIndexed { index, dto ->
                 val pokemonId = index.inc()
+                println("Pokemon id is $pokemonId at id $dto")
                 states.add(
                     PokemonState(
                         id = pokemonId,

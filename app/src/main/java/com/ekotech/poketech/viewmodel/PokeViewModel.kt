@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ekotech.poketech.data.model.PokemonAllDTO
+import com.ekotech.core_database.doa.PokemonDao
 import com.ekotech.poketech.uistate.PokemonState
 import com.ekotech.poketech.uistate.PokemonStateMapper
 import com.ekotech.poketech.usecase.GetAllPokemon
@@ -17,6 +17,7 @@ import javax.inject.Inject
 class PokeViewModel @Inject constructor(
     private val getAllPokemon: GetAllPokemon,
     private val stateMapper: PokemonStateMapper,
+    private val pokemonDao: PokemonDao,
 ) : ViewModel() {
 
     private val _allPokeState: MutableState<Resource<List<PokemonState>>> =

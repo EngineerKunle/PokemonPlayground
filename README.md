@@ -1,6 +1,3 @@
-Pokemon Playground -> Jetpack Compose (Working progress)
-
-
  # Pokemon Dex App 
 
 This app is built with the latest technology. 
@@ -31,4 +28,4 @@ Pokemon Dex App is using modularization stratergies.
 
 ## PokeAPI 
 
-This app is using the free PokeAPI 
+This app is using the free [PokeAPI](https://pokeapi.co)

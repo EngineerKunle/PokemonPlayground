@@ -2,16 +2,18 @@ package com.ekotech.poketech.repo
 
 import com.ekotech.poketech.data.api.PokemonService
 import com.ekotech.poketech.data.model.PokemonAllDTO
-import com.ekotech.poketech.data.model.PokemonDTO
+import com.ekotech.poketech.shared.MockPokemonDTO.mockPokemon
 import com.ekotech.poketech.util.Resource
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import okhttp3.ResponseBody.Companion.toResponseBody
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -50,23 +52,20 @@ class AllPokemonRepoTest {
 
         coEvery {
             service.getAllPokemon()
-        } returns  Response.error(401, "Unauthorized".toResponseBody())
+        } returns Response.error(401, "Unauthorized".toResponseBody())
 
         val result = allPokemon.getAllPokemon()
 
         assertEquals(true, result is Resource.Error)
     }
 
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
+
     private fun mockData(): Response<PokemonAllDTO> {
         val mockResult = PokemonAllDTO(mockPokemon())
         return Response.success(mockResult)
     }
-
-    private fun mockPokemon() = listOf(
-        PokemonDTO("Bulbasaur", "www"),
-        PokemonDTO("Charmander", "www"),
-        PokemonDTO("Pikachu", "www"),
-        PokemonDTO("Squirtle", "www"),
-    )
-
 }

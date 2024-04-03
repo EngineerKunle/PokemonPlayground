@@ -7,7 +7,8 @@ import com.ekotech.core_database.entity.Pokemon
 
 @Database(
     entities = [Pokemon::class],
-    version = 1
+    version = 1,
+    exportSchema = true,
 )
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao

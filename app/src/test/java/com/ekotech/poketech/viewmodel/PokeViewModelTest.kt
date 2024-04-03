@@ -1,5 +1,6 @@
 package com.ekotech.poketech.viewmodel
 
+import com.ekotech.core_database.doa.PokemonDao
 import com.ekotech.poketech.data.model.PokemonAllDTO
 import com.ekotech.poketech.shared.MockPokemonDTO.mockPokemon
 import com.ekotech.poketech.uistate.PokemonState
@@ -11,17 +12,14 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import kotlin.math.exp
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PokeViewModelTest {
@@ -29,6 +27,7 @@ class PokeViewModelTest {
     private lateinit var viewModel: PokeViewModel
     private val getAllPokemon: GetAllPokemon = mockk(relaxed = true)
     private val stateMapper: PokemonStateMapper = mockk(relaxed = true)
+    private val pokemonDao: PokemonDao = mockk(relaxed = true)
     private val dispatcher = UnconfinedTestDispatcher()
 
     @Before
@@ -46,7 +45,7 @@ class PokeViewModelTest {
             stateMapper.transform(any())
         } returns mockTransformList()
 
-        viewModel = PokeViewModel(getAllPokemon, stateMapper)
+        viewModel = PokeViewModel(getAllPokemon, stateMapper, pokemonDao)
 
         coVerify(exactly = 1) {
             stateMapper.transform(any())
@@ -62,7 +61,7 @@ class PokeViewModelTest {
             getAllPokemon.invoke()
         } throws Exception("Something went wrong")
 
-        viewModel = PokeViewModel(getAllPokemon, stateMapper)
+        viewModel = PokeViewModel(getAllPokemon, stateMapper, pokemonDao)
 
         coVerify(exactly = 0) {
             stateMapper.transform(any())
@@ -82,6 +81,6 @@ class PokeViewModelTest {
 
     private fun mockGetAllPokemon(): Resource<PokemonAllDTO> = Resource.Success(mockPokemonDTO)
 
-    private fun mockTransformList():Resource<List<PokemonState>> = Resource.Success(emptyList())
+    private fun mockTransformList(): Resource<List<PokemonState>> = Resource.Success(emptyList())
 
 }

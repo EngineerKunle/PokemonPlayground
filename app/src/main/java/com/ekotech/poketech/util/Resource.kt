@@ -1,7 +1,5 @@
 package com.ekotech.poketech.util
 
-//Based off :
-// https://github.com/icanerdogan/ValorantGuideApp/blob/master/app/src/main/java/com/ibrahimcanerdogan/valorantguideapp/util/Resource.kt
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null

@@ -29,3 +29,11 @@ Pokemon Dex App is using modularization stratergies.
 ## PokeAPI 
 
 This app is using the free [PokeAPI](https://pokeapi.co)
+
+## TODO
+
+Offline mode to be added for Home page but needs to be added for Details Page
+
+Animation for Images needs to be added
+
+Details View Model Test needs to be added 

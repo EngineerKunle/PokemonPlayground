@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">PokemonDex</string>
     <string name="pokemon">Pokemon</string>
+    <string name="pokemon_details">Pokemon Details</string>
     <string name="back_button">back\n</string>
+    <string name="toolbar_title">Pokemon</string>
 
     <string name="generic_error_title">Oops!</string>
     <string name="generic_error_message">Something went wrong</string>
     <string name="generic_error_dismiss">OK</string>
+
+    <string name="pokemon_detail_image">Pokemon Detail Image</string>
+    <string name="pokemon_item_image">Pokemon Item Image</string>
 </resources>

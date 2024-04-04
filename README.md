@@ -32,7 +32,7 @@ This app is using the free [PokeAPI](https://pokeapi.co)
 
 ## TODO
 
-Offline mode to be added for Home page but needs to be added for Details Page
+Offline mode added for Home page but needs to be added for Details Page
 
 Animation for Images needs to be added
 
